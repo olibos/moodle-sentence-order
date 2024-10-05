@@ -88,16 +88,11 @@ export class MoodleSentence extends LitElement {
         if (typeof oldIndex !== 'number' || typeof newIndex !== 'number') return;
         const [word] = words.splice(oldIndex, 1);
         words.splice(newIndex, 0, word)
-        if (correctVersion === words.join(' ')) {
-          container.classList.add('correct');
-        }else{
-          container.classList.remove('correct');
-        }
+        container.classList.toggle('correct', correctVersion === words.join(' '));
       }
     });
   }
 }
-
 declare global {
   interface HTMLElementTagNameMap {
     'moodle-sentence': MoodleSentence
