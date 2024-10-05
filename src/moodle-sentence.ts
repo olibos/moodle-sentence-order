@@ -43,6 +43,8 @@ export class MoodleSentence extends LitElement {
   static styles = css`
   :host{
     display: block;
+    --background-color: #fff;
+    --text-color: #000;
   }
   
   @media (prefers-color-scheme: dark) {
@@ -64,8 +66,8 @@ export class MoodleSentence extends LitElement {
     transition: background-color 0.5s ease-in-out;
     display: inline-block;
     margin:calc(1rem / 4) calc(1rem / 8);
-    background: var(--background-color, #fff);
-    color:var(--text-color, #000);
+    background: var(--background-color);
+    color:var(--text-color);
     border: 1px solid #cdcdcd;
     border-radius: 4px;
     padding: calc(1rem / 4) 1rem;
