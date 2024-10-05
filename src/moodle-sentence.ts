@@ -3,10 +3,8 @@ import { customElement, query } from 'lit/decorators.js'
 import Sortable from 'sortablejs';
 
 /**
- * An example element.
- *
- * @slot - This element has a slot
- * @csspart button - The button
+ * A web component that displays shuffled words from its text content,
+ * allowing users to rearrange them back into the correct order.
  */
 @customElement('moodle-sentence')
 export class MoodleSentence extends LitElement {
@@ -15,7 +13,7 @@ export class MoodleSentence extends LitElement {
 
   #words: string[] = [];
 
-  #correctVersion: string = '';
+  #correctVersion = '';
 
   shuffleArray(array: string[]) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -42,7 +40,7 @@ export class MoodleSentence extends LitElement {
     `;
   }
 
-  static styles? = css`
+  static styles = css`
   :host{
     display: block;
   }
@@ -62,9 +60,6 @@ export class MoodleSentence extends LitElement {
   .container.correct span {
     --background-color: #c6efce;
   }  
-  .container.incorrect span {
-    --background-color: #ffccc7;
-  }
   .container span {
     transition: background-color 0.5s ease-in-out;
     display: inline-block;
@@ -91,7 +86,6 @@ export class MoodleSentence extends LitElement {
         if (typeof oldIndex !== 'number' || typeof newIndex !== 'number') return;
         const [word] = words.splice(oldIndex, 1);
         words.splice(newIndex, 0, word)
-        console.info(words, event.oldIndex, event.newIndex);
         if (correctVersion === words.join(' ')) {
           container.classList.add('correct');
         }else{
