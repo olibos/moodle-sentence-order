@@ -23,12 +23,15 @@ export class MoodleSentence extends LitElement {
     }
     const shuffledArray = [...array];
 
+    const MAX_ATTEMPTS = 100;
+    let attempts = 0;
     do {
+      attempts++;
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
       }
-    } while (MoodleSentence.arraysEqual(array, shuffledArray));
+    } while (attempts < MAX_ATTEMPTS && MoodleSentence.arraysEqual(array, shuffledArray));
 
     return shuffledArray;
   }
