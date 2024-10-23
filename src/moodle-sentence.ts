@@ -15,16 +15,34 @@ export class MoodleSentence extends LitElement {
 
   #correctVersion = '';
 
-  shuffleArray(array: string[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-        // Generate a random index from 0 to i
-        const j = Math.floor(Math.random() * (i + 1));
-        
-        // Swap elements at i and j
-        [array[i], array[j]] = [array[j], array[i]];
+  static shuffleArray(array: string[]) {
+    switch (array.length) {
+      case 0: return [];
+      case 1: return [array[0]];
+      case 2: return [array[1], array[0]];
     }
-    return array;
-}
+    const shuffledArray = [...array];
+
+    const MAX_ATTEMPTS = 100;
+    let attempts = 0;
+    do {
+      attempts++;
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+      }
+    } while (attempts < MAX_ATTEMPTS && MoodleSentence.arraysEqual(array, shuffledArray));
+
+    return shuffledArray;
+  }
+
+  static arraysEqual(a: string[], b: string[]): boolean {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
 
   render() {
     if (this.#words.length === 0) {
@@ -32,7 +50,7 @@ export class MoodleSentence extends LitElement {
       if (!text) return html`No text provided.`;
       const words = text.split(/\s+/g);
       this.#correctVersion = words.join(' ');
-      this.#words = this.shuffleArray(words);
+      this.#words = MoodleSentence.shuffleArray(words);
     }
 
     return html`
@@ -84,7 +102,7 @@ export class MoodleSentence extends LitElement {
       swapThreshold: 1,
       animation: 150,
       onEnd(event) {
-        const {newIndex, oldIndex} = event;
+        const { newIndex, oldIndex } = event;
         if (typeof oldIndex !== 'number' || typeof newIndex !== 'number') return;
         const [word] = words.splice(oldIndex, 1);
         words.splice(newIndex, 0, word)
