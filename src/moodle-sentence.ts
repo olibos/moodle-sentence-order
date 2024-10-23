@@ -60,10 +60,11 @@ export class MoodleSentence extends LitElement {
 
   
   .container.correct span {
-    --background-color: #c6efce;
+    --background-color: #1fb33c;
+    --text-color: #fff;
   }  
   .container span {
-    transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
     display: inline-block;
     margin:calc(1rem / 4) calc(1rem / 8);
     background: var(--background-color);
