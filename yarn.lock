@@ -1274,9 +1274,9 @@ __metadata:
   linkType: hard
 
 "sortablejs@npm:^1.15.3":
-  version: 1.15.4
-  resolution: "sortablejs@npm:1.15.4"
-  checksum: 10c0/aa22614b8aadc0253eb19b88c29d748af37bb3ab3d16a58c619a3bc806a96b5742e51908bffe94ab4d75a6f7458ea1524a4619c109a1e0716bb72b2ae25463e5
+  version: 1.15.6
+  resolution: "sortablejs@npm:1.15.6"
+  checksum: 10c0/a75dcf53e5613b4106d46434e40114830f9c6449b3b439bc1925c1fbf0a0c1f044727a8f3d4ae1759fa7beaa33e7eb0c4a413e6aa88d6026577b59f3658ff727
   languageName: node
   linkType: hard
 
